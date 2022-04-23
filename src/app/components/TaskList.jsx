@@ -9,7 +9,7 @@ function TaskList({ group }) {
       <h2>{group.name}</h2>
       {
         tasks.map((task) => {
-          return (task.group === group.id) ? <div>{task.name}</div> : '';
+          return (task.group === group.id) ? <div key={task.id}>{task.name}</div> : '';
         })
       }
     </div>
