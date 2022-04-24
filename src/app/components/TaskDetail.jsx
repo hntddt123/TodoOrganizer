@@ -39,7 +39,7 @@ function TaskDetail() {
         </button>
       </div>
       <div>
-        <select onChange={setTaskGroupHandler}>
+        <select onChange={setTaskGroupHandler} value={task.group}>
           {groups.map((group) => (
             <option
               key={group.id}
