@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { setTaskComplete, setTaskName } from '../redux/actions/taskActions';
+import { setTaskComplete, setTaskName, setTaskGroup } from '../redux/actions/taskActions';
 
 function TaskDetail() {
   const tasks = useSelector((state) => state.tasksReducer);
@@ -13,14 +13,17 @@ function TaskDetail() {
 
   const dispatch = useDispatch();
 
+  const setTaskNameHandler = useCallback((e) => {
+    dispatch(setTaskName(task.id, e.target.value));
+  }, [dispatch]);
+
   const setTaskCompleteHandler = useCallback(() => {
-    dispatch(setTaskComplete(task.id, !task.isComplete))
+    dispatch(setTaskComplete(task.id, !task.isComplete));
   }, [dispatch]);
 
-  const setTaskNameHandler = useCallback((text) => {
-    dispatch(setTaskName(task.name, text))
+  const setTaskGroupHandler = useCallback((e) => {
+    dispatch(setTaskGroup(task.id, e.target.value));
   }, [dispatch]);
-
 
   return (
     <div>
@@ -31,20 +34,25 @@ function TaskDetail() {
         />
       </div>
       <div>
-        <button onClick={setTaskCompleteHandler}>
+        <button type='button' onClick={setTaskCompleteHandler}>
           {task.isComplete ? 'Undo' : 'Complete'}
         </button>
       </div>
       <div>
-        <select>
-          {groups.map((group) =>
-            <option key={group.id} value={group.id}>{group.name}</option>
-          )}
+        <select onChange={setTaskGroupHandler}>
+          {groups.map((group) => (
+            <option
+              key={group.id}
+              value={group.id}
+            >
+              {group.name}
+            </option>
+          ))}
         </select>
       </div>
       <div>
         <Link to='/dashboard'>
-          <button>
+          <button type='button'>
             Back to Dashbord
           </button>
         </Link>
