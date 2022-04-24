@@ -7,35 +7,49 @@ import {
   SET_TASK_GROUP
 } from "./taskActionType";
 
-export const requestNewTask = (groupID) => ({
-  type: REQUEST_NEW_TASK,
-  groupID: groupID
+export const requestNewTask = createAction(REQUEST_NEW_TASK, (groupID) => {
+  return {
+    payload: {
+      groupID: groupID
+    }
+  }
 });
 
 export const createNewTask = createAction(CREATE_NEW_TASK, (taskID, groupID, ownerID) => {
   return {
     payload: {
-      taskID: taskID,
-      groupID: groupID,
-      ownerID: ownerID
+      name: 'New Task',
+      id: taskID,
+      group: groupID,
+      owner: ownerID,
+      isComplete: false
     }
   }
 });
 
-export const setTaskComplete = (taskID, isComplete) => ({
-  type: SET_TASK_COMPLETE,
-  taskID: taskID,
-  isComplete: isComplete
+export const setTaskComplete = createAction(SET_TASK_COMPLETE, (taskID, isComplete) => {
+  return {
+    payload: {
+      id: taskID,
+      isComplete: isComplete
+    }
+  }
 });
 
-export const setTaskName = (taskID, name) => ({
-  type: SET_TASK_NAME,
-  taskID: taskID,
-  name: name
+export const setTaskName = createAction(SET_TASK_NAME, (taskID, name) => {
+  return {
+    payload: {
+      id: taskID,
+      name: name
+    }
+  }
 });
 
-export const setTaskGroup = (taskID, groupID) => ({
-  type: SET_TASK_GROUP,
-  taskID: taskID,
-  groupID: groupID
+export const setTaskGroup = createAction(SET_TASK_GROUP, (taskID, groupID) => {
+  return {
+    payload: {
+      id: taskID,
+      group: groupID
+    }
+  }
 });

@@ -1,12 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
-import produce from 'immer';
 import {
-  REQUEST_NEW_TASK,
-  CREATE_NEW_TASK,
-  SET_TASK_COMPLETE
-} from '../actions/taskActionType';
-import {
-  createNewTask
+  createNewTask,
+  setTaskComplete,
 } from '../actions/taskActions';
 
 const defaultTasks = [
@@ -47,14 +42,16 @@ const defaultTasks = [
 ];
 
 export const tasksReducer = createReducer(defaultTasks, (builder) => {
-  builder.addCase(createNewTask, (state, action) => {
-    return [...state,
-    {
-      id: action.payload.taskID,
-      name: 'New Task',
-      group: action.payload.groupID,
-      owner: action.payload.ownerID,
-      isComplete: false
-    }];
-  });
+  builder
+    .addCase(createNewTask, (state, action) => {
+      const task = action.payload;
+      
+      state.push(task);
+    })
+    .addCase(setTaskComplete, (state, action) => {
+      const id = action.payload.id;
+      const task = state.find((task) => task.id === id);
+
+      task.isComplete = !task.isComplete;
+    });
 });
