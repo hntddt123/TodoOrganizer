@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import Navigation from './Navigation';
 
-import { store } from '../redux/store/index';
+import { store } from '../redux/store/store';
 import { history } from '../redux/store/history';
 
 function App() {
@@ -20,4 +20,5 @@ function App() {
     </BrowserRouter>
   );
 }
+
 export default App;
