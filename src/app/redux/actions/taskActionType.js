@@ -1,0 +1,2 @@
+export const REQUEST_NEW_TASK = 'REQUEST_NEW_TASK';
+export const CREATE_NEW_TASK = 'CREATE_NEW_TASK';

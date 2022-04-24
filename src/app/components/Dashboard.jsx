@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import TaskList from './TaskList';
 
 function Dashboard() {
-  const groups = useSelector((state) => state.groups);
+  const groups = useSelector((state) => state.groupsReducer);
 
   return (
     <div>
