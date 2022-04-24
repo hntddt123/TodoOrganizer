@@ -12,16 +12,16 @@ const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore(
   {
-    reducer: { 
-      usersReducer, 
-      groupsReducer, 
-      tasksReducer,  
+    reducer: {
+      usersReducer,
+      groupsReducer,
+      tasksReducer,
       commentsReducer
     },
     middleware: [createLogger(), sagaMiddleware]
   }
 );
 
-for (let saga in sagas) {
+for (const saga in sagas) {
   sagaMiddleware.run(sagas[saga]);
 }

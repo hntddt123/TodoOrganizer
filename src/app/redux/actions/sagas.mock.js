@@ -8,7 +8,7 @@ export function* taskCreationSaga() {
   while (true) {
     const { payload } = yield take(taskActionType.REQUEST_NEW_TASK);
     const taskID = uuid();
-    const ownerID = `User1`;
+    const ownerID = 'User1';
 
     yield put(taskActions.createNewTask(taskID, payload.groupID, ownerID));
 

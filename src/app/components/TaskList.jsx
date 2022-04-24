@@ -11,25 +11,24 @@ function TaskList({ group }) {
   const createNewTaskHandler = useCallback(
     () => dispatch(requestNewTask(group.id)),
     [dispatch]
-  )
+  );
 
   return (
     <div>
       <h2>{group.name}</h2>
       {
-        tasks.map((task) => {
-          return ((task.group === group.id)
-            ?
+        tasks.map((task) => ((task.group === group.id)
+          ? (
             <Link to={`/task/${task.id}`} key={task.id}>
               <div>{task.name}</div>
             </Link>
-            : null);
-        })
+          )
+          : null))
       }
-      <button onClick={createNewTaskHandler}>
+      <button type='button' onClick={createNewTaskHandler}>
         Add new task
       </button>
-    </div >
+    </div>
   );
 }
 
