@@ -1,6 +1,6 @@
 const defaultGroups = [
   {
-    name: 'ToDo',
+    name: 'Todo',
     id: 'Group1',
     owner: 'User1',
   },
