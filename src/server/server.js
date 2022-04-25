@@ -1,13 +1,14 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import morgan from 'morgan';
+
 import { connectDB } from './connectDB';
 import './initializeDB';
-import { authenticationRoute } from './authenticate'''
+import { authenticationRoute } from './authenticate';
 
 let port = 9000;
 let app = express();
-
 
 app.listen(port, console.log(`Server listening on port:${port}`));
 
@@ -18,7 +19,8 @@ app.get('/', (req, res) => {
 app.use(
   cors(),
   bodyParser.urlencoded({ extended: true }),
-  bodyParser.json()
+  bodyParser.json(),
+  morgan('tiny')
 );
 
 authenticationRoute(app);

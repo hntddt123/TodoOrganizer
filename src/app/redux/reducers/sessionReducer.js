@@ -2,7 +2,8 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
   requestAuthenticateUser,
-  processAuthenticateUser
+  processAuthenticateUser,
+  loadDBState
 } from '../actions/authActions';
 import {
   AUTHENTICATING
@@ -22,6 +23,12 @@ export const sessionReducer = createReducer(defaultAuthentication, (builder) => 
     })
     .addCase(processAuthenticateUser, (state, action) => {
       state.authenticated = action.payload.authenticated;
-    }
-    );
+    })
+    .addCase(loadDBState, (state, action) => {
+      const { id } = action.payload.state.session;
+      return {
+        ...state,
+        id: id
+      }
+    });
 });

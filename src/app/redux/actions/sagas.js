@@ -58,13 +58,17 @@ export function* userAuthenticationSaga() {
     const password = payload.password;
 
     try {
-      const { data } = axios.post(`${url}/authenticate`, { username, password })
+      const { data } = yield axios.post(`${url}/authenticate`, { username, password });
+      console.log(data);
       if (!data) {
         throw new Error();
       }
+      yield put(authActions.loadDBState(data));
+      yield put(authActions.processAuthenticateUser(authActionType.AUTHENTICATED));
+      // console.log(`Authenticated: \n${JSON.stringify(data, null, 2)}`);
     } catch (error) {
-      console.log('Authentication Error:', error);
-      yield put(authActions.processAuthenticateUser(authActionType.NOT_AUTHENTICATED))
+      console.log(`Authentication Error: \n${error}`);
+      yield put(authActions.processAuthenticateUser(authActionType.NOT_AUTHENTICATED));
     }
   }
 }

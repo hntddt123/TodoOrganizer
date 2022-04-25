@@ -1,24 +1,13 @@
-const defaultGroups = [
-  {
-    name: 'Todo',
-    id: 'Group1',
-    owner: 'User1',
-  },
-  {
-    name: 'Doing',
-    id: 'Group2',
-    owner: 'User1',
-  },
-  {
-    name: 'Done',
-    id: 'Group3',
-    owner: 'User1',
-  }
-];
+import { createReducer } from "@reduxjs/toolkit";
 
-export function groupsReducer(state = defaultGroups, action) {
-  switch (action.type) {
-    default:
-      return state;
-  }
-}
+import { loadDBState } from "../actions/authActions";
+
+export const groupsReducer = createReducer([], (builder) => {
+  builder.addCase(loadDBState, (state, action) => {
+    const { groups } = action.payload.state;
+    return groups;
+  })
+});
+
+
+

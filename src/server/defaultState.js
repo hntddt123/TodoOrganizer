@@ -38,31 +38,36 @@ export const defaultState = {
       name: 'Do tests',
       id: 'Task1',
       group: 'Group1',
-      owner: 'User1'
+      owner: 'User1',
+      isComplete: false
     },
     {
       name: 'Practice React',
       id: 'Task2',
       group: 'Group1',
-      owner: 'User1'
+      owner: 'User1',
+      isComplete: false
     },
     {
       name: 'Test functional components',
       id: 'Task3',
       group: 'Group2',
-      owner: 'User2'
+      owner: 'User2',
+      isComplete: false
     },
     {
       name: 'Test hooks',
       id: 'Task4',
       group: 'Group2',
-      owner: 'User2'
+      owner: 'User2',
+      isComplete: false
     },
     {
       name: 'Test run',
       id: 'Task5',
       group: 'Group3',
-      owner: 'User2'
+      owner: 'User2',
+      isComplete: false
     }
   ],
   comments: [

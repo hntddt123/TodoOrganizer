@@ -10,14 +10,16 @@ async function loadUserState(user) {
   let tasks = await db.collection('tasks').find({ owner: user.id }).toArray();
   let groups = await db.collection('groups').find({ owner: user.id }).toArray();
 
-  return {
-    tasks,
-    groups,
-    session: {
-      authenticated: 'AUTHENTICATED',
-      id: user.id
+  return (
+    {
+      tasks,
+      groups,
+      session: {
+        authenticated: 'AUTHENTICATED',
+        id: user.id
+      }
     }
-  }
+  );
 }
 
 export const authenticationRoute = (app) => {
@@ -25,17 +27,17 @@ export const authenticationRoute = (app) => {
     let { username, password } = req.body;
     let db = await connectDB();
 
-    let user = db.collection('users').findOne({ name: username });
+    let user = await db.collection('users').findOne({ name: username });
 
     if (!user) {
-      return res.status(500).send("Login Error");
+      return res.status(500).send("Login Error 1");
     }
 
     let passwordHashed = md5(password);
     let isPasswordCorrect = (passwordHashed === user.passwordHash);
 
     if (!isPasswordCorrect) {
-      return res.status(500).send("Login Error");
+      return res.status(500).send("Login Error 2");
     }
 
     let token = uuid();
