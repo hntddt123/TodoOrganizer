@@ -1,11 +1,23 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import { requestAuthenticateUser } from '../redux/actions/authActions';
-import { NOT_AUTHENTICATED } from '../redux/actions/authActionType';
+import { AUTHENTICATED, NOT_AUTHENTICATED } from '../redux/actions/authActionType';
 
 function LoginPage() {
   const session = useSelector((state) => state.sessionReducer);
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (session.authenticated === AUTHENTICATED) {
+      navigate('/dashboard');
+    } else {
+      console.log('Not Authenticated');
+    }
+  }, [session.authenticated]);
 
   const loginHandler = useCallback((e) => {
     e.preventDefault();

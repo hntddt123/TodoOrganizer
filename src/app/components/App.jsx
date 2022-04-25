@@ -7,12 +7,12 @@ import Navigation from './Navigation';
 import TaskDetail from './TaskDetail';
 import LoginPage from './LoginPage';
 
-import { history } from '../redux/store/history';
+import { NOT_AUTHENTICATED } from '../redux/actions/authActionType';
 
 const AuthRequired = ({ session, children }) => {
   console.info(`session authenticated: ${session.authenticated}, location: ${location.pathname}`);
 
-  if (!session.authenticated) {
+  if (session.authenticated === NOT_AUTHENTICATED) {
     return <Navigate to="/" replace />;
   }
 
@@ -23,7 +23,7 @@ function App() {
   const session = useSelector((state) => state.sessionReducer);
 
   return (
-    <BrowserRouter history={history}>
+    <BrowserRouter>
       <Navigation />
       <Routes>
         <Route
