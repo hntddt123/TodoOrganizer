@@ -4,6 +4,8 @@ import axios from "axios";
 
 import * as taskActionType from './taskActionType';
 import * as taskActions from './taskActions';
+import * as authActionType from './authActionType';
+import * as authActions from './authActions';
 
 const url = 'http://localhost:9000';
 
@@ -46,5 +48,23 @@ export function* taskModificationSaga() {
     })
 
     console.info(`Response: ${payload.task.isComplete}`);
+  }
+}
+
+export function* userAuthenticationSaga() {
+  while (true) {
+    const { payload } = yield take(authActionType.REQUEST_AUTHENTICATE_USER);
+    const username = payload.username;
+    const password = payload.password;
+
+    try {
+      const { data } = axios.post(`${url}/authenticate`, { username, password })
+      if (!data) {
+        throw new Error();
+      }
+    } catch (error) {
+      console.log('Authentication Error:', error);
+      yield put(authActions.processAuthenticateUser(authActionType.NOT_AUTHENTICATED))
+    }
   }
 }

@@ -6,6 +6,7 @@ import { usersReducer } from '../reducers/usersReducer';
 import { groupsReducer } from '../reducers/groupsReducer';
 import { tasksReducer } from '../reducers/tasksReducer';
 import { commentsReducer } from '../reducers/commentsReducer';
+import { sessionReducer } from '../reducers/sessionReducer';
 import * as sagas from '../actions/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -16,7 +17,8 @@ export const store = configureStore(
       usersReducer,
       groupsReducer,
       tasksReducer,
-      commentsReducer
+      commentsReducer,
+      sessionReducer
     },
     middleware: [createLogger(), sagaMiddleware]
   }
