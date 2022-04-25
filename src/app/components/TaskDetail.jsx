@@ -1,24 +1,35 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { setTaskComplete, setTaskName, setTaskGroup } from '../redux/actions/taskActions';
+
+import { useDidMount } from './hooks/useDidMountHook';
+import { setTaskComplete, setTaskName, setTaskGroup, getTask } from '../redux/actions/taskActions';
 
 function TaskDetail() {
   const tasks = useSelector((state) => state.tasksReducer);
   const groups = useSelector((state) => state.groupsReducer);
   const comments = useSelector((state) => state.commentsReducer);
 
+  const didMountRef = useDidMount();
+
   const props = useParams();
   const task = tasks.find((task) => task.id === props.id);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!didMountRef) {
+      dispatch(getTask(task));
+    }
+  }, [task]);
 
   const setTaskNameHandler = useCallback((e) => {
     dispatch(setTaskName(task.id, e.target.value));
   }, [dispatch]);
 
   const setTaskCompleteHandler = useCallback(() => {
-    dispatch(setTaskComplete(task.id, !task.isComplete));
+    const task = tasks.find((task) => task.id === props.id);
+    dispatch(setTaskComplete(task.id));
   }, [dispatch]);
 
   const setTaskGroupHandler = useCallback((e) => {
