@@ -22,6 +22,10 @@ module.exports = {
         loader: 'babel-loader'
       },
       {
+        test: /\.css$/,
+        loader:'css-loader',
+      },
+      {
         test: /\.(jpg|jpeg|png|gif|mp3|svg|ico)$/,
         type: 'asset/resource'
       }
