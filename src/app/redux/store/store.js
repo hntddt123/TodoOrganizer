@@ -6,7 +6,7 @@ import { usersReducer } from '../reducers/usersReducer';
 import { groupsReducer } from '../reducers/groupsReducer';
 import { tasksReducer } from '../reducers/tasksReducer';
 import { commentsReducer } from '../reducers/commentsReducer';
-import * as sagas from '../actions/sagas.mock';
+import * as sagas from '../actions/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
