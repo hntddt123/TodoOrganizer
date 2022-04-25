@@ -18,7 +18,8 @@ const defaultTasks = [
     name: 'Practice React',
     id: 'Task2',
     group: 'Group1',
-    owner: 'User1'
+    owner: 'User1',
+    isComplete: false
   },
   {
     name: 'Test functional components',
@@ -51,21 +52,21 @@ export const tasksReducer = createReducer(defaultTasks, (builder) => {
       state.push(task);
     })
     .addCase(setTaskComplete, (state, action) => {
-      const { id } = action.payload;
-      const task = state.find((taskState) => taskState.id === id);
+      const { taskID } = action.payload;
+      const task = state.find((taskState) => taskState.id === taskID);
 
       task.isComplete = !task.isComplete;
     })
     .addCase(setTaskGroup, (state, action) => {
-      const { id } = action.payload;
-      const task = state.find((taskState) => taskState.id === id);
+      const { taskID, groupID } = action.payload;
+      const task = state.find((taskState) => taskState.id === taskID);
 
-      task.group = action.payload.group;
+      task.group = groupID;
     })
     .addCase(setTaskName, (state, action) => {
-      const { id } = action.payload;
-      const task = state.find((taskState) => taskState.id === id);
+      const { taskID, name } = action.payload;
+      const task = state.find((taskState) => taskState.id === taskID);
 
-      task.name = action.payload.name;
+      task.name = name;
     });
 });

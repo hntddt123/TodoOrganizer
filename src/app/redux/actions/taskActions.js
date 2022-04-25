@@ -4,7 +4,8 @@ import {
   CREATE_NEW_TASK,
   SET_TASK_COMPLETE,
   SET_TASK_NAME,
-  SET_TASK_GROUP
+  SET_TASK_GROUP,
+  GET_TASK
 } from './taskActionType';
 
 export const requestNewTask = createAction(REQUEST_NEW_TASK, (groupID) => ({
@@ -23,23 +24,29 @@ export const createNewTask = createAction(CREATE_NEW_TASK, (taskID, groupID, own
   }
 }));
 
-export const setTaskComplete = createAction(SET_TASK_COMPLETE, (taskID, isComplete) => ({
+export const setTaskComplete = createAction(SET_TASK_COMPLETE, (taskID) => ({
   payload: {
-    id: taskID,
-    isComplete: isComplete
+    taskID: taskID
   }
 }));
 
 export const setTaskName = createAction(SET_TASK_NAME, (taskID, name) => ({
   payload: {
-    id: taskID,
+    taskID: taskID,
     name: name
   }
 }));
 
 export const setTaskGroup = createAction(SET_TASK_GROUP, (taskID, groupID) => ({
   payload: {
-    id: taskID,
-    group: groupID
+    taskID: taskID,
+    groupID: groupID
   }
 }));
+
+export const getTask = createAction(GET_TASK, (task) => ({
+  payload: {
+    task: task
+  }
+}));
+
