@@ -2,19 +2,16 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import path from 'path';
 
 import { connectDB } from './connectDB';
 import './initializeDB';
 import { authenticationRoute } from './authenticate';
 
-let port = 9000;
+let port = process.env.PORT || 9000;
 let app = express();
 
 app.listen(port, console.log(`Server listening on port:${port}`));
-
-app.get('/', (req, res) => {
-  res.send('test');
-});
 
 app.use(
   cors(),
@@ -24,6 +21,13 @@ app.use(
 );
 
 authenticationRoute(app);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, '../../dist')));
+  app.get('/*', (req, res) => {
+    res.sendFile(path.resolve('index.html'));
+  });
+}
 
 export const addNewTask = async (task) => {
   let db = await connectDB();

@@ -7,7 +7,7 @@ import * as taskActions from './taskActions';
 import * as authActionType from './authActionType';
 import * as authActions from './authActions';
 
-const url = 'http://localhost:9000';
+const url = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:9000';
 
 export function* taskCreationSaga() {
   while (true) {

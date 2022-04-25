@@ -4,14 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "webpack --mode=production",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack",
+    "start": "npm run server",
     "dev": "webpack-dev-server --open",
     "testConnectDB": "babel-node ./src/server/connectDB",
     "initializeDB": "babel-node ./src/server/initializeDB",
-    "server": "babel-node ./src/server/server",
+    "serverProd": "NODE_ENV=production babel-node ./src/server/server",
+    "serverDev": "babel-node ./src/server/server",
     "serverTest": "babel-node ./src/server/server.spec",
-    "start-dev": "concurrently \"npm run server\" \"npm run dev\""
+    "startDev": "concurrently \"npm run server\" \"npm run dev\""
   },
   "keywords": [],
   "author": "",
