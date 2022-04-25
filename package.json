@@ -13,7 +13,7 @@
     "serverProd": "NODE_ENV=production babel-node ./src/server/server",
     "serverDev": "babel-node ./src/server/server",
     "serverTest": "babel-node ./src/server/server.spec",
-    "startDev": "concurrently \"npm run server\" \"npm run dev\""
+    "startDev": "concurrently \"npm run serverDev\" \"npm run dev\""
   },
   "keywords": [],
   "author": "",
@@ -40,9 +40,12 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
     "axios": "^0.26.1",
+    "bootstrap": "^5.1.3",
+    "html-webpack-plugin": "^5.5.0",
     "md5": "^2.3.0",
     "morgan": "^1.10.0",
     "react": "^18.0.0",
+    "react-bootstrap": "^2.3.0",
     "react-dom": "^18.0.0",
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",

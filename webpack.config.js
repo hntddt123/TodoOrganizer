@@ -1,10 +1,13 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
   mode: 'development',
-  entry: `${__dirname}/src/app/index.js`,
+  entry: `./src/app/index.js`,
   output: {
     path: `${__dirname}/dist`,
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/',
+    assetModuleFilename: 'images/[hash][ext][query]'
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -17,7 +20,17 @@ module.exports = {
       {
         test: /\.jsx?/,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.(jpg|jpeg|png|gif|mp3|svg|ico)$/,
+        type: 'asset/resource'
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      favicon: './public/HDMM.ico'
+    })
+  ]
 }
