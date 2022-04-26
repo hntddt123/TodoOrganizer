@@ -8,6 +8,3 @@ export const groupsReducer = createReducer([], (builder) => {
     return groups;
   })
 });
-
-
-
