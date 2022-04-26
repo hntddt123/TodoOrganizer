@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
 import { requestAuthenticateUser } from '../redux/actions/authActions';
 import { AUTHENTICATED, NOT_AUTHENTICATED } from '../redux/actions/authActionType';
 
@@ -15,7 +14,7 @@ function LoginPage() {
     if (session.authenticated === AUTHENTICATED) {
       navigate('/dashboard');
     } else {
-      console.log('Not Authenticated');
+      // console.log('Not Authenticated');
     }
   }, [session.authenticated]);
 
@@ -28,11 +27,12 @@ function LoginPage() {
   }, [dispatch]);
 
   return (
-    <div>
-      <h2>User Login</h2>
+    <div className='card m-3 p-3 border-2'>
+      <h2 className='text-4xl m-3 p-3'>User Login</h2>
       <form onSubmit={loginHandler}>
         <div>
           <input
+            className='shadow-sm rounded-lg m-3 p-3 border-2'
             type='text'
             placeholder='username'
             name='username'
@@ -41,6 +41,7 @@ function LoginPage() {
         </div>
         <div>
           <input
+            className='shadow-sm rounded-lg m-3 p-3 border-2'
             type='password'
             placeholder='password'
             name='password'
@@ -52,7 +53,10 @@ function LoginPage() {
             ? <p>User or Password incorrect</p>
             : null
           }
-          <button type='submit'>
+          <button
+            className='text-xl bg-lime-300 hover:bg-lime-500 rounded-lg m-3 p-3'
+            type='submit'
+          >
             Login
           </button>
         </div>

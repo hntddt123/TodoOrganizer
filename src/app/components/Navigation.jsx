@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 function Navigation() {
   return (
-    <div>
-      <Link to='/dashboard'>
+    <div className='font-mono text-4xl text-lime-400 text-center m-2'>
+      <Link to='/'>
         <h1>
           TodoList
         </h1>

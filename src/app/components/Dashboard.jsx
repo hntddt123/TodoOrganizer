@@ -6,9 +6,9 @@ function Dashboard() {
   const groups = useSelector((state) => state.groupsReducer);
 
   return (
-    <div>
-      <h1>
-        TODO看板
+    <div className='card bg-lime-200'>
+      <h1 className='text-4xl'>
+        看板
       </h1>
       <h2>
         {groups.map((group) => <TaskList key={group.id} group={group} />)}

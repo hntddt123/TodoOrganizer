@@ -37,20 +37,31 @@ function TaskDetail() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className='card border-2 m-3'>
       <div>
+        <div className='text-4xl'>
+          Task Name
+        </div>
         <input
+          className='shadow-sm rounded-lg m-3 p-3 border-2'
           onChange={setTaskNameHandler}
           value={task.name}
         />
       </div>
       <div>
-        <button type='button' onClick={setTaskCompleteHandler}>
+        <button
+          className='card text-xl border-lime-400 hover:bg-lime-300 border-2 mt-3'
+          type='button'
+          onClick={setTaskCompleteHandler}>
           {task.isComplete ? 'Undo' : 'Complete'}
         </button>
       </div>
       <div>
-        <select onChange={setTaskGroupHandler} value={task.group}>
+        <select
+          className='card text-xl border-lime-400 hover:bg-lime-300 bg-white border-2 mt-3'
+          onChange={setTaskGroupHandler}
+          value={task.group}
+        >
           {groups.map((group) => (
             <option
               key={group.id}
@@ -63,7 +74,9 @@ function TaskDetail() {
       </div>
       <div>
         <Link to='/dashboard'>
-          <button type='button'>
+          <button
+            className='card text-xl border-lime-400 hover:bg-lime-300 border-2 mt-3'
+            type='button'>
             Back to Dashbord
           </button>
         </Link>
