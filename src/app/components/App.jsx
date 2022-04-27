@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
-import Navigation from './Navigation';
+import Header from './Header';
 import TaskDetail from './TaskDetail';
 import LoginPage from './LoginPage';
 
@@ -24,7 +24,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navigation />
+      <Header />
       <Routes>
         <Route
           path='/'

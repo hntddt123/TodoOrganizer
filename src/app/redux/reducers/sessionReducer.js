@@ -9,11 +9,7 @@ import {
   AUTHENTICATING
 } from '../actions/authActionType';
 
-const defaultAuthentication = {
-  authenticated: false
-};
-
-export const sessionReducer = createReducer(defaultAuthentication, (builder) => {
+export const sessionReducer = createReducer({}, (builder) => {
   builder
     .addCase(requestAuthenticateUser, (state, action) => {
       return {

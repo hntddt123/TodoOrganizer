@@ -6,7 +6,7 @@ import path from 'path';
 
 import { connectDB } from './connectDB';
 import './initializeDB';
-import { authenticationRoute } from './authenticate';
+import { authenticationRoute } from './auth/authenticate';
 
 let port = process.env.PORT || 9000;
 let app = express();

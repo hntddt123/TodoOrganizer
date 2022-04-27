@@ -1,9 +1,10 @@
 import md5 from 'md5';
+import { NOT_AUTHENTICATED } from '../app/redux/actions/authActionType';
 
 export const defaultState = {
-  // session: {
-  //   authenticated: false
-  // },
+  session: {
+    authenticated: NOT_AUTHENTICATED
+  },
   users: [
     {
       id: 'User1',

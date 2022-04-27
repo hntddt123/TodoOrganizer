@@ -27,9 +27,9 @@ function LoginPage() {
   }, [dispatch]);
 
   return (
-    <div className='card m-3 p-3 border-2'>
-      <h2 className='text-4xl m-3 p-3'>User Login</h2>
-      <form onSubmit={loginHandler}>
+    <div className='grid grid-cols-1 justify-items-center card m-3 p-3 border-2'>
+      <h2 className='text-center text-3xl m-3 p-3'>Login to your organizer</h2>
+      <form onSubmit={loginHandler} >
         <div>
           <input
             className='shadow-sm rounded-lg m-3 p-3 border-2'
@@ -49,12 +49,15 @@ function LoginPage() {
           />
         </div>
         <div>
-          {session.authenticated === NOT_AUTHENTICATED
-            ? <p>User or Password incorrect</p>
-            : null
-          }
+          <div>
+            {session.authenticated === NOT_AUTHENTICATED
+              ? <p className='text-center text-base text-red-500 animate-bounceOnce duration-300'>User or Password incorrect</p>
+              : null
+            }
+          </div>
           <button
-            className='text-xl bg-lime-300 hover:bg-lime-500 rounded-lg m-3 p-3'
+            className='text-xl bg-secondary hover:bg-lime-500 rounded-xl 
+            transition-all duration-200 ease-in m-3 p-3'
             type='submit'
           >
             Login

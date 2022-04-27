@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import md5 from 'md5';
-import { connectDB } from './connectDB';
+import { connectDB } from '../connectDB';
 
 const authenticationTokens = [];
 
