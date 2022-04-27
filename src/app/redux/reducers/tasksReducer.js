@@ -34,7 +34,7 @@ export const tasksReducer = createReducer([], (builder) => {
       task.name = name;
     })
     .addCase(loadDBState, (state, action) => {
-      const { tasks } = action.payload.state;
+      const { tasks } = action.payload.state.taskData;
       return tasks;
     });
 });

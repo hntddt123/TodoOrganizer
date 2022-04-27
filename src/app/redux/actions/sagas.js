@@ -1,6 +1,6 @@
-import { take, put, select } from "redux-saga/effects";
+import { take, put, select } from 'redux-saga/effects';
 import { v4 as uuid } from 'uuid';
-import axios from "axios";
+import axios from 'axios';
 
 import * as taskActionType from './taskActionType';
 import * as taskActions from './taskActions';
@@ -13,7 +13,7 @@ export function* taskCreationSaga() {
   while (true) {
     const { payload } = yield take(taskActionType.REQUEST_NEW_TASK);
     const taskID = uuid();
-    const ownerID = 'User1';
+    const ownerID = '6269a540ac0c5f841d4dc6cc';
 
     yield put(taskActions.createNewTask(taskID, payload.groupID, ownerID));
 
@@ -37,7 +37,6 @@ export function* taskModificationSaga() {
       taskActionType.GET_TASK
     ]);
 
-
     axios.post(`${url}/task/update`, {
       task: {
         id: payload.task.id,
@@ -45,7 +44,7 @@ export function* taskModificationSaga() {
         group: payload.task.group,
         isComplete: payload.task.isComplete
       }
-    })
+    });
 
     console.info(`Response: ${payload.task.isComplete}`);
   }
@@ -54,16 +53,33 @@ export function* taskModificationSaga() {
 export function* userAuthenticationSaga() {
   while (true) {
     const { payload } = yield take(authActionType.REQUEST_AUTHENTICATE_USER);
-    const username = payload.username;
-    const password = payload.password;
+    const { email, password } = payload;
 
     try {
-      const { data } = yield axios.post(`${url}/authenticate`, { username, password });
-      console.log(data);
+      const { data } = yield axios.post(`${url}/user/login`, {
+        email: email,
+        password: password
+      });
+
+      // console.log(data);
+
       if (!data) {
         throw new Error();
       }
-      yield put(authActions.loadDBState(data));
+
+      const userReponse = yield axios.get(`${url}/user`, {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log(userReponse.data);
+
+      if (!userReponse) {
+        throw new Error();
+      }
+
+      yield put(authActions.loadDBState(userReponse.data));
       yield put(authActions.processAuthenticateUser(authActionType.AUTHENTICATED));
       // console.log(`Authenticated: \n${JSON.stringify(data, null, 2)}`);
     } catch (error) {

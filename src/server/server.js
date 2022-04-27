@@ -1,26 +1,32 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import path from 'path';
+import mongoose from 'mongoose';
 
-import { connectDB } from './connectDB';
 import './initializeDB';
-import { authenticationRoute } from './auth/authenticate';
+import { taskRouter } from './routes/taskRoute';
+import { userRouter } from './routes/userRoute';
 
-let port = process.env.PORT || 9000;
-let app = express();
+mongoose.connect('mongodb://127.0.0.1:27017/taskorganizer');
+mongoose.connection.on('error', (error) => console.log(error));
+
+const port = process.env.PORT || 9000;
+const app = express();
 
 app.listen(port, console.log(`Server listening on port:${port}`));
 
+morgan.token('authenticate', (req) => req.body);
+
 app.use(
   cors(),
+  cookieParser(),
   bodyParser.urlencoded({ extended: true }),
   bodyParser.json(),
-  morgan('tiny')
+  morgan('dev')
 );
-
-authenticationRoute(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.resolve(__dirname, '../../dist')));
@@ -29,37 +35,12 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-export const addNewTask = async (task) => {
-  let db = await connectDB();
-  let collection = db.collection('tasks');
+// Sub Routes
+app.use('/task', taskRouter);
 
-  await collection.insertOne(task);
-};
+app.use('/user', userRouter);
 
-export const updateTask = async (task) => {
-  let { id, name, group, isComplete } = task;
-  let db = await connectDB();
-  let collection = db.collection('tasks');
-
-  if (name !== undefined) {
-    await collection.updateOne({ id }, { $set: { name } });
-  }
-  if (group !== undefined) {
-    await collection.updateOne({ id }, { $set: { group } });
-  }
-  if (isComplete !== undefined) {
-    await collection.updateOne({ id }, { $set: { isComplete } });
-  }
-}
-
-app.post('/task/new', async (req, res) => {
-  let task = req.body.task;
-  await addNewTask(task);
-  res.status(200).send();
-});
-
-app.post('/task/update', async (req, res) => {
-  let task = req.body.task;
-  await updateTask(task);
-  res.status(200).send();
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.json({ error: err });
 });

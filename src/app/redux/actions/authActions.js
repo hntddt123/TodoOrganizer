@@ -7,9 +7,9 @@ import {
 } from './authActionType';
 
 export const requestAuthenticateUser = createAction(REQUEST_AUTHENTICATE_USER,
-  (username, password) => ({
+  (email, password) => ({
     payload: {
-      username: username,
+      email: email,
       password: password
     }
   })
@@ -27,7 +27,7 @@ export const processAuthenticateUser = createAction(PROCESSING_AUTHENTICATE_USER
 export const loadDBState = createAction(LOAD_DB_STATE,
   (data) => ({
     payload: {
-      state: data.state
+      state: data
     }
   })
 );
