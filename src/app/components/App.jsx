@@ -9,11 +9,11 @@ import LoginPage from './LoginPage';
 
 import { NOT_AUTHENTICATED } from '../redux/actions/authActionType';
 
-const AuthRequired = ({ session, children }) => {
+function AuthRequired({ session, children }) {
   console.info(`session authenticated: ${session.authenticated}, location: ${location.pathname}`);
 
   if (session.authenticated === NOT_AUTHENTICATED) {
-    return <Navigate to="/" replace />;
+    return <Navigate to='/' replace />;
   }
 
   return children;
@@ -41,8 +41,7 @@ function App() {
         <Route
           path='*'
           element={<div><h2>Quite Empty Here</h2></div>}
-        >
-        </Route>
+        />
       </Routes>
     </BrowserRouter>
   );

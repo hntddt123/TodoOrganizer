@@ -9,7 +9,7 @@ export async function connectDB() {
   let client = await MongoClient.connect(url);
   db = client.db();
 
-  console.info("DB connected", db);
+  // console.info("DB connected", db);
 
   return db;
 }

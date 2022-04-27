@@ -21,15 +21,15 @@ function LoginPage() {
   const loginHandler = useCallback((e) => {
     e.preventDefault();
 
-    let username = e.target['username'].value;
-    let password = e.target['password'].value;
+    const username = e.target.username.value;
+    const password = e.target.password.value;
     dispatch(requestAuthenticateUser(username, password));
   }, [dispatch]);
 
   return (
     <div className='grid grid-cols-1 justify-items-center card m-3 p-3 border-2'>
       <h2 className='text-center text-3xl m-3 p-3'>Login to your organizer</h2>
-      <form onSubmit={loginHandler} >
+      <form onSubmit={loginHandler}>
         <div>
           <input
             className='shadow-sm rounded-lg m-3 p-3 border-2'
@@ -52,11 +52,10 @@ function LoginPage() {
           <div>
             {session.authenticated === NOT_AUTHENTICATED
               ? <p className='text-center text-base text-red-500 animate-bounceOnce duration-300'>User or Password incorrect</p>
-              : null
-            }
+              : null}
           </div>
           <button
-            className='text-xl bg-secondary hover:bg-lime-500 rounded-xl 
+            className='text-xl bg-secondary hover:bg-lime-500 rounded-xl
             transition-all duration-200 ease-in m-3 p-3'
             type='submit'
           >

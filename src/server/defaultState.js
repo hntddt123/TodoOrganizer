@@ -1,37 +1,31 @@
-import md5 from 'md5';
-import { NOT_AUTHENTICATED } from '../app/redux/actions/authActionType';
-
 export const defaultState = {
-  session: {
-    authenticated: NOT_AUTHENTICATED
-  },
-  users: [
-    {
-      id: 'User1',
-      name: 'Dev',
-      passwordHash: md5('D3V')
-    },
-    {
-      id: 'User2',
-      name: 'Tasker2',
-      passwordHash: md5('TASKING')
-    }
-  ],
+  // users: [
+  //   {
+  //     id: '626994bce3898f7a7574b4a6',
+  //     name: 'Dev',
+  //     password: md5('D3V')
+  //   },
+  //   {
+  //     id: 'User2',
+  //     name: 'Tasker2',
+  //     password: md5('TASKING')
+  //   }
+  // ],
   groups: [
     {
       name: 'ToDo',
       id: 'Group1',
-      owner: 'User1',
+      owner: '626994bce3898f7a7574b4a6',
     },
     {
       name: 'Doing',
       id: 'Group2',
-      owner: 'User1',
+      owner: '626994bce3898f7a7574b4a6',
     },
     {
       name: 'Done',
       id: 'Group3',
-      owner: 'User1',
+      owner: '626994bce3898f7a7574b4a6',
     }
   ],
   tasks: [
@@ -39,14 +33,14 @@ export const defaultState = {
       name: 'Do tests',
       id: 'Task1',
       group: 'Group1',
-      owner: 'User1',
+      owner: '626994bce3898f7a7574b4a6',
       isComplete: false
     },
     {
       name: 'Practice React',
       id: 'Task2',
       group: 'Group1',
-      owner: 'User1',
+      owner: '626994bce3898f7a7574b4a6',
       isComplete: false
     },
     {
@@ -73,7 +67,7 @@ export const defaultState = {
   ],
   comments: [
     {
-      owner: 'User1',
+      owner: '626994bce3898f7a7574b4a6',
       id: 'Comment1',
       task: 'Task1',
       content: 'Great!'
