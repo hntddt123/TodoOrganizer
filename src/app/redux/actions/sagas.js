@@ -25,7 +25,7 @@ export function* taskCreationSaga() {
         owner: ownerID,
         isComplete: false
       }
-    });
+    }, { withCredentials: true });
 
     console.info(`Response: ${res}`);
   }
@@ -43,8 +43,8 @@ export function* taskModificationSaga() {
         name: payload.task.name,
         group: payload.task.group,
         isComplete: payload.task.isComplete
-      }
-    });
+      },
+    }, { withCredentials: true });
 
     console.info(`Response: ${payload.task.isComplete}`);
   }
@@ -62,6 +62,7 @@ export function* userAuthenticationSaga() {
           email: email,
           password: password
         },
+
         { withCredentials: true }
       );
 

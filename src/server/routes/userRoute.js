@@ -7,19 +7,16 @@ import { loadUserTaskData } from '../auth/authentication';
 export const userRouter = express.Router();
 
 const SECRET = process.env.JWT_SECRET;
-const EXPIRATION = process.env.JWT_EXPIRATION;
 
 const loginMiddleware = (req, res, next) => {
-  passport.authenticate(
-    'login',
+  passport.authenticate('login',
     (err, user) => {
       try {
         if (err || !user) {
           return next(new Error('user is not present'));
         }
 
-        req.login(
-          user,
+        req.login(user,
           { session: false },
           (error) => {
             if (error) {
@@ -28,38 +25,31 @@ const loginMiddleware = (req, res, next) => {
 
             const body = {
               _id: user._id,
-              email: user.email,
-              expiration: Date.now() + parseInt(EXPIRATION, 10)
+              email: user.email
             };
 
-            const token = jwt.sign(
-              { user: body },
-              SECRET
-            );
+            const token = jwt.sign({ user: body },
+              SECRET);
 
             return res
-              .cookie(
-                'jwt',
+              .cookie('jwt',
                 token,
                 {
                   httpOnly: true,
                   secure: (process.env.NODE_ENV === 'production'),
-                  maxAge: 10 * 60 * 1000
-                }
-              )
+                  maxAge: 10 * 60 * 1000,
+                  sameSite: true
+                })
               .json({ token });
-          }
-        );
+          });
       } catch (error) {
         return next(error);
       }
       return next();
-    }
-  )(req, res, next);
+    })(req, res, next);
 };
 
-userRouter.get(
-  '/',
+userRouter.get('/',
   passport.authenticate('jwtheader', { session: false }),
   async (req, res) => {
     const taskData = await loadUserTaskData(req.user);
@@ -69,24 +59,19 @@ userRouter.get(
       user: req.user,
       taskData: taskData
     });
-  }
-);
+  });
 
-userRouter.post(
-  '/signup',
+userRouter.post('/signup',
   passport.authenticate('signup', { session: false }),
   async (req, res) => {
     res.json({
       message: 'Signup successful',
       user: req.user
     });
-  }
-);
+  });
 
-userRouter.post(
-  '/login',
-  loginMiddleware
-);
+userRouter.post('/login',
+  loginMiddleware);
 
 userRouter.use((err, req, res, next) => {
   console.log(err);

@@ -1,4 +1,6 @@
 import express from 'express';
+import passport from 'passport';
+
 import { connectDB } from '../dbFunctions/connectDB';
 
 export const taskRouter = express.Router();
@@ -26,6 +28,14 @@ export const updateTask = async (task) => {
   }
 };
 
+taskRouter.use('/',
+  passport.authenticate('jwtcookie', { session: false }),
+  async (req, res, next) => {
+    // console.log(req.cookies.jwt);
+    next();
+  }
+);
+
 taskRouter.post('/new', async (req, res) => {
   const { task } = req.body;
   await addNewTask(task);
@@ -34,6 +44,7 @@ taskRouter.post('/new', async (req, res) => {
 
 taskRouter.post('/update', async (req, res) => {
   const { task } = req.body;
+
   await updateTask(task);
   res.status(200).send();
 });
