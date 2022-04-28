@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 import { requestAuthenticateUser } from '../redux/actions/authActions';
 import { AUTHENTICATED, NOT_AUTHENTICATED } from '../redux/actions/authActionType';
 
@@ -12,9 +13,7 @@ function LoginPage() {
 
   useEffect(() => {
     if (session.authenticated === AUTHENTICATED) {
-      navigate('/dashboard');
-    } else {
-      // console.log('Not Authenticated');
+      navigate('/dashboard', { replace: true });
     }
   }, [session.authenticated]);
 

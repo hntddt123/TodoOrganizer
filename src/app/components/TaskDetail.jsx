@@ -52,7 +52,8 @@ function TaskDetail() {
         <button
           className='card text-xl border-lime-400 hover:bg-lime-300 border-2 mt-3'
           type='button'
-          onClick={setTaskCompleteHandler}>
+          onClick={setTaskCompleteHandler}
+        >
           {task.isComplete ? 'Undo' : 'Complete'}
         </button>
       </div>
@@ -76,7 +77,8 @@ function TaskDetail() {
         <Link to='/dashboard'>
           <button
             className='card text-xl border-lime-400 hover:bg-lime-300 border-2 mt-3'
-            type='button'>
+            type='button'
+          >
             Back to Dashbord
           </button>
         </Link>

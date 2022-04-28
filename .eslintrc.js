@@ -39,6 +39,7 @@ module.exports = {
     'no-unused-vars': 'warn',
     'no-param-reassign': 'warn',
     'max-len': ['warn', { code: 150 }],
-    'jsx-quotes': ['error', 'prefer-single']
+    'jsx-quotes': ['error', 'prefer-single'],
+    'function-paren-newline': ['warn', { minItems: 5 }]
   },
 };

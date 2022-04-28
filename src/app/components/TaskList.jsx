@@ -8,6 +8,7 @@ function TaskList({ group }) {
   const tasks = useSelector((state) => state.tasksReducer);
 
   const dispatch = useDispatch();
+
   const createNewTaskHandler = useCallback(
     () => dispatch(requestNewTask(group.id)),
     [dispatch]
@@ -30,7 +31,8 @@ function TaskList({ group }) {
       <button
         className='text-xl bg-lime-300 hover:bg-lime-500 rounded-lg m-3 p-3'
         type='button'
-        onClick={createNewTaskHandler}>
+        onClick={createNewTaskHandler}
+      >
         Add Task
       </button>
     </div>
