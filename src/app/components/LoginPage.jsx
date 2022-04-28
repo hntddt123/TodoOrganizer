@@ -26,12 +26,12 @@ function LoginPage() {
   }, [dispatch]);
 
   return (
-    <div className='card grid grid-cols-1 bg-lime-200 justify-items-center m-3 p-3 border-2'>
+    <div className='card grid grid-cols-1 bg-lime-200 justify-items-center m-3 p-3'>
       <h2 className='text-center text-3xl m-3 p-3'>Login to your organizer</h2>
       <form onSubmit={loginHandler}>
         <div>
           <input
-            className='shadow-sm rounded-lg m-3 p-3 border-2'
+            className='shadow-sm rounded-lg mt-3 p-3'
             type='text'
             placeholder='username'
             name='username'
@@ -40,7 +40,7 @@ function LoginPage() {
         </div>
         <div>
           <input
-            className='shadow-sm rounded-lg m-3 p-3 border-2'
+            className='shadow-sm rounded-lg mt-3 mb-3 p-3'
             type='password'
             placeholder='password'
             name='password'
@@ -55,7 +55,7 @@ function LoginPage() {
           </div>
           <button
             className='text-xl bg-secondary hover:bg-lime-500 rounded-xl
-            transition-all duration-200 ease-in m-3 p-3'
+            transition-all duration-200 ease-in mt-3 mb-3 p-3'
             type='submit'
           >
             Login

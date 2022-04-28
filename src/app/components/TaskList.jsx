@@ -15,13 +15,13 @@ function TaskList({ group }) {
   );
 
   return (
-    <div className='bg-slate-50 card m-3 p-3 border-2'>
-      <h2 className='text-3xl m-3'>{group.name}</h2>
+    <div className='bg-dark card m-3 p-3 border-2'>
+      <h2 className='text-3xl text-white m-3'>{group.name}</h2>
       {
         tasks.map((task) => ((task.group === group.id)
           ? (
             <Link to={`/task/${task.id}`} key={task.id}>
-              <div className='card text-center text-2xl border-lime-400
+              <div className='card-small text-white text-center text-2xl border-lime-400
               hover:bg-lime-300 border-2 mt-3
               transition-all duration-200 ease-in'
               >
@@ -32,8 +32,8 @@ function TaskList({ group }) {
           : null))
       }
       <button
-        className='text-xl bg-lime-300 hover:bg-lime-500 rounded-lg
-        transition-all duration-200 ease-in m-3 p-3'
+        className='w-full text-xl bg-lime-300 hover:bg-lime-500 rounded-lg
+        transition-all duration-200 ease-in mt-3 mb-3 p-3'
         type='button'
         onClick={createNewTaskHandler}
       >

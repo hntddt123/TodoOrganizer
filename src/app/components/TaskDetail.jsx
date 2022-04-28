@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 import { useDidMount } from './hooks/useDidMountHook';
-import { setTaskComplete, setTaskName, setTaskGroup, getTask } from '../redux/actions/taskActions';
+import { setTaskName, setTaskGroup, getTask } from '../redux/actions/taskActions';
 
 function TaskDetail() {
   const tasks = useSelector((state) => state.tasksReducer);
@@ -25,11 +25,6 @@ function TaskDetail() {
 
   const setTaskNameHandler = useCallback((e) => {
     dispatch(setTaskName(task.id, e.target.value));
-  }, [dispatch]);
-
-  const setTaskCompleteHandler = useCallback(() => {
-    const task = tasks.find((task) => task.id === props.id);
-    dispatch(setTaskComplete(task.id));
   }, [dispatch]);
 
   const setTaskGroupHandler = useCallback((e) => {
@@ -65,20 +60,10 @@ function TaskDetail() {
         </select>
       </div>
       <div>
-        <button
-          className='card text-xl border-lime-400 hover:bg-lime-300 bg-white
-          transition-all duration-200 ease-in border-2 mt-3'
-          type='button'
-          onClick={setTaskCompleteHandler}
-        >
-          {task.isComplete ? 'Undo' : 'Complete'}
-        </button>
-      </div>
-      <div>
         <Link to='/dashboard'>
           <button
-            className='card-small text-lg border-lime-400 hover:bg-lime-300 bg-white
-            transition-all duration-200 ease-in border-2 mt-3'
+            className='card-small text-lg bg-lime-300 hover:bg-lime-500
+            transition-all duration-200 ease-in mt-3'
             type='button'
           >
             Back to Dashbord

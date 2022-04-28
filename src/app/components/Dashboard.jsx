@@ -6,8 +6,8 @@ function Dashboard() {
   const groups = useSelector((state) => state.groupsReducer);
 
   return (
-    <div className='card bg-lime-200'>
-      <h1 className='text-4xl'>
+    <div className='card'>
+      <h1 className='text-white text-4xl'>
         看板
       </h1>
       <h2>

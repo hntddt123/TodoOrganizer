@@ -6,7 +6,8 @@ module.exports = {
     extend: {
       colors: {
         secondary: '#A9F05A',
-        primary: '#62D948'
+        primary: '#62D948',
+        dark: '#121212'
       },
       keyframes: {
         bounce: {
