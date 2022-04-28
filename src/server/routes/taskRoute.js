@@ -13,7 +13,7 @@ export const addNewTask = async (task) => {
 };
 
 export const updateTask = async (task) => {
-  const { id, name, group, isComplete } = task;
+  const { id, name, group } = task;
   const db = await connectDB();
   const collection = db.collection('tasks');
 
@@ -22,9 +22,6 @@ export const updateTask = async (task) => {
   }
   if (group !== undefined) {
     await collection.updateOne({ id }, { $set: { group } });
-  }
-  if (isComplete !== undefined) {
-    await collection.updateOne({ id }, { $set: { isComplete } });
   }
 };
 

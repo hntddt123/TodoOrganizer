@@ -19,8 +19,7 @@ export const createNewTask = createAction(CREATE_NEW_TASK, (taskID, groupID, own
     name: 'New Task',
     id: taskID,
     group: groupID,
-    owner: ownerID,
-    isComplete: false
+    owner: ownerID
   }
 }));
 

@@ -22,8 +22,7 @@ export function* taskCreationSaga() {
         id: taskID,
         group: payload.groupID,
         name: 'New Task',
-        owner: ownerID,
-        isComplete: false
+        owner: ownerID
       }
     }, { withCredentials: true });
 
@@ -41,12 +40,11 @@ export function* taskModificationSaga() {
       task: {
         id: payload.task.id,
         name: payload.task.name,
-        group: payload.task.group,
-        isComplete: payload.task.isComplete
+        group: payload.task.group
       },
     }, { withCredentials: true });
 
-    console.info(`Response: ${payload.task.isComplete}`);
+    console.info(`Response: ${JSON.stringify(payload.task, null, 2)}`);
   }
 }
 

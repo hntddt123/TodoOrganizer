@@ -3,7 +3,6 @@ import { createReducer } from '@reduxjs/toolkit';
 import { loadDBState } from '../actions/authActions';
 import {
   createNewTask,
-  setTaskComplete,
   setTaskGroup,
   setTaskName
 } from '../actions/taskActions';
@@ -14,12 +13,6 @@ export const tasksReducer = createReducer([], (builder) => {
       const task = action.payload;
 
       state.push(task);
-    })
-    .addCase(setTaskComplete, (state, action) => {
-      const { taskID } = action.payload;
-      const task = state.find((taskState) => taskState.id === taskID);
-
-      task.isComplete = !task.isComplete;
     })
     .addCase(setTaskGroup, (state, action) => {
       const { taskID, groupID } = action.payload;
