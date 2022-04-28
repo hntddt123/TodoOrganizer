@@ -11,6 +11,7 @@ const SECRET = process.env.JWT_SECRET;
 const loginMiddleware = (req, res, next) => {
   passport.authenticate('login',
     (err, user) => {
+      console.log(user)
       try {
         if (err || !user) {
           return next(new Error('user is not present'));
@@ -72,7 +73,3 @@ userRouter.post('/signup',
 
 userRouter.post('/login',
   loginMiddleware);
-
-userRouter.use((err, req, res, next) => {
-  console.log(err);
-});
