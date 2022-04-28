@@ -4,7 +4,6 @@ import TaskList from './TaskList';
 
 function Dashboard() {
   const groups = useSelector((state) => state.groupsReducer);
-  console.log(groups)
 
   return (
     <div className='card bg-lime-200'>

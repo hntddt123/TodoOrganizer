@@ -2,8 +2,10 @@ import passport from 'passport';
 import localStrategy from 'passport-local';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 
-import { connectDB } from '../connectDB';
+import { connectDB } from '../dbFunctions/connectDB';
 import { User } from '../mongooseSchema/User';
+
+const SECRET = process.env.JWT_SECRET;
 
 passport.use(
   'signup',
@@ -58,12 +60,12 @@ passport.use(
   )
 );
 
-// user route
 passport.use(
+  'jwtheader',
   new Strategy(
     {
-      secretOrKey: 'SECRET_HERE',
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: SECRET
     },
     async (token, done) => {
       try {
@@ -71,6 +73,34 @@ passport.use(
       } catch (error) {
         return done(error);
       }
+    }
+  )
+);
+
+const cookieExtractor = (req) => {
+  let jwt;
+
+  if (req.cookies) {
+    jwt = req.cookies.jwt;
+  }
+
+  return jwt;
+};
+
+passport.use(
+  'jwt',
+  new Strategy(
+    {
+      jwtFromRequest: cookieExtractor,
+      secretOrKey: SECRET
+    },
+    (token, done) => {
+      const { expiration } = token;
+
+      if (Date.now() > expiration) {
+        done('Unauthorized', false);
+      }
+      done(null, token);
     }
   )
 );

@@ -56,10 +56,14 @@ export function* userAuthenticationSaga() {
     const { email, password } = payload;
 
     try {
-      const { data } = yield axios.post(`${url}/user/login`, {
-        email: email,
-        password: password
-      });
+      const { data } = yield axios.post(
+        `${url}/user/login`,
+        {
+          email: email,
+          password: password
+        },
+        { withCredentials: true }
+      );
 
       // console.log(data);
 

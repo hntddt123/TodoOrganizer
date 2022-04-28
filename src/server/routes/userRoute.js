@@ -2,14 +2,17 @@ import express from 'express';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
 
-import { loadUserTaskData } from '../auth/authenticate';
+import { loadUserTaskData } from '../auth/authentication';
 
 export const userRouter = express.Router();
 
-const loginMiddleware = async (req, res, next) => {
+const SECRET = process.env.JWT_SECRET;
+const EXPIRATION = process.env.JWT_EXPIRATION;
+
+const loginMiddleware = (req, res, next) => {
   passport.authenticate(
     'login',
-    async (err, user) => {
+    (err, user) => {
       try {
         if (err || !user) {
           return next(new Error('user is not present'));
@@ -18,34 +21,46 @@ const loginMiddleware = async (req, res, next) => {
         req.login(
           user,
           { session: false },
-          async (error) => {
+          (error) => {
             if (error) {
               return next(error);
             }
 
             const body = {
               _id: user._id,
-              email: user.email
+              email: user.email,
+              expiration: Date.now() + parseInt(EXPIRATION, 10)
             };
 
             const token = jwt.sign(
               { user: body },
-              'SECRET_HERE'
+              SECRET
             );
 
-            return res.json({ token });
+            return res
+              .cookie(
+                'jwt',
+                token,
+                {
+                  httpOnly: true,
+                  secure: (process.env.NODE_ENV === 'production'),
+                  maxAge: 10 * 60 * 1000
+                }
+              )
+              .json({ token });
           }
         );
       } catch (error) {
         return next(error);
       }
+      return next();
     }
   )(req, res, next);
 };
 
 userRouter.get(
   '/',
-  passport.authenticate('jwt', { session: false }),
+  passport.authenticate('jwtheader', { session: false }),
   async (req, res) => {
     const taskData = await loadUserTaskData(req.user);
 

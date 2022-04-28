@@ -5,8 +5,9 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import path from 'path';
 import mongoose from 'mongoose';
+import 'dotenv/config';
 
-import './initializeDB';
+import './dbFunctions/initializeDB';
 import { taskRouter } from './routes/taskRoute';
 import { userRouter } from './routes/userRoute';
 

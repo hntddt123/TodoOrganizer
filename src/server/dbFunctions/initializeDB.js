@@ -1,6 +1,6 @@
 import { defaultState } from './defaultState';
 import { connectDB } from './connectDB';
-import { User } from './mongooseSchema/User';
+import { User } from '../mongooseSchema/User';
 
 async function initialzeDB() {
   const db = await connectDB();

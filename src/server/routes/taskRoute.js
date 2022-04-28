@@ -1,5 +1,5 @@
 import express from 'express';
-import { connectDB } from '../connectDB';
+import { connectDB } from '../dbFunctions/connectDB';
 
 export const taskRouter = express.Router();
 

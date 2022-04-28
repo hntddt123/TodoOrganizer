@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 
-const url = process.env.MONGODB_URI || `mongodb://localhost:27017/taskorganizer`;
+const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/taskorganizer';
 let db = null;
 
 export async function connectDB() {
