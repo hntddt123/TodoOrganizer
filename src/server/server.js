@@ -22,7 +22,8 @@ app.listen(port, console.log(`Server listening on port:${port}`));
 morgan.token('authenticate', (req) => req.body);
 
 app.use(
-  cors(),
+  cors({ origin: true, credentials: true,
+  }),
   cookieParser(),
   bodyParser.urlencoded({ extended: true }),
   bodyParser.json(),
