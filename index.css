@@ -8,4 +8,14 @@
     padding: theme('spacing.6');
     box-shadow: theme('boxShadow.sm');
   }
+
+  .card-small {
+    border-radius: theme('borderRadius.lg');
+    padding: theme('spacing.2');
+    box-shadow: theme('boxShadow.sm');
+  }
+}
+
+body {
+  background-color: #121212;
 }

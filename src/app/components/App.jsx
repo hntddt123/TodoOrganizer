@@ -15,7 +15,6 @@ function AuthRequired({ children }) {
 
   console.log(`authenticated status: ${session.authenticated}
 location: ${location.pathname}`);
-
   if (session.authenticated === AUTHENTICATED) {
     return children;
   }

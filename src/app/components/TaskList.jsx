@@ -21,7 +21,10 @@ function TaskList({ group }) {
         tasks.map((task) => ((task.group === group.id)
           ? (
             <Link to={`/task/${task.id}`} key={task.id}>
-              <div className='card border-lime-400 hover:bg-lime-300 border-2 mt-3'>
+              <div className='card text-center text-2xl border-lime-400
+              hover:bg-lime-300 border-2 mt-3
+              transition-all duration-200 ease-in'
+              >
                 {task.name}
               </div>
             </Link>
@@ -29,7 +32,8 @@ function TaskList({ group }) {
           : null))
       }
       <button
-        className='text-xl bg-lime-300 hover:bg-lime-500 rounded-lg m-3 p-3'
+        className='text-xl bg-lime-300 hover:bg-lime-500 rounded-lg
+        transition-all duration-200 ease-in m-3 p-3'
         type='button'
         onClick={createNewTaskHandler}
       >
