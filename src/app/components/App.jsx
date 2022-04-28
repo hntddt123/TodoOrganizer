@@ -40,7 +40,7 @@ function App() {
         />
         <Route
           path='*'
-          element={<div><h2>Quite Nothing TODO Here</h2></div>}
+          element={<div><h2 className='text-xl text-white'>Quite Nothing TODO Here</h2></div>}
         />
       </Routes>
     </BrowserRouter>

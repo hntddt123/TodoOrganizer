@@ -27,7 +27,7 @@ function LoginPage() {
 
   return (
     <div className='card grid grid-cols-1 bg-lime-200 justify-items-center m-3 p-3'>
-      <h2 className='text-center text-3xl m-3 p-3'>Login to your organizer</h2>
+      <h2 className='text-center text-2xl m-3 p-3'>Login to your organizer</h2>
       <form onSubmit={loginHandler}>
         <div>
           <input
